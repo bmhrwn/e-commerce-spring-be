@@ -38,7 +38,15 @@ public class ProductService {
         return repository.save(product);
     }
 
-    public Product update(Product product){
+    public Product update(String id,RequestProduct request){
+        Category category = service.findById(request.getCategory_id());
+        Product product = this.findById(id);
+        product.setName(request.getName());
+        product.setDescription(request.getDescription());
+        product.setImage(request.getImage());
+        product.setPrice(request.getPrice());
+        product.setStock(request.getStock());
+        product.setCategory(category);
         return repository.save(product);
     }
 
