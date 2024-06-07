@@ -17,6 +17,8 @@ public class User implements Serializable {
 
     private String password;
 
+    private String username;
+
     private String name;
     private String address;
     private String email;
@@ -24,4 +26,9 @@ public class User implements Serializable {
     private String roles;
 
     private Boolean isActive;
+
+
+
+
+    
 }

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,22 +16,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.e_commerce.dto.RequestProduct;
-import com.e_commerce.entity.Product;
-import com.e_commerce.service.ProductService;
+import com.e_commerce.dto.RequestUser;
+import com.e_commerce.entity.User;
+import com.e_commerce.service.UserService;
 
 import jakarta.validation.Valid;
 
+
 @RestController
-@RequestMapping("/api/product")
-public class ProductController {
+@RequestMapping("/api/users")
+public class UserController {
 
     @Autowired
-    private ProductService service;
+    private UserService service;
 
-    @GetMapping()
+      @GetMapping()
     public ResponseEntity findAll() {
-        List<Product> data = service.findAll();
+        List<User> data = service.findAll();
         HashMap response = new HashMap<>();
         response.put("success", true);
         response.put("status_code", 200);
@@ -40,7 +42,7 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ResponseEntity findById(@PathVariable String id) {
-        Product data = service.findById(id);
+        User data = service.findById(id);
         HashMap response = new HashMap<>();
         response.put("success", true);
         response.put("status_code", 200);
@@ -49,8 +51,8 @@ public class ProductController {
     }
 
     @PostMapping()
-    public ResponseEntity create(@RequestBody @Valid RequestProduct request) {
-        Product data = service.create(request);
+    public ResponseEntity create(@RequestBody @Valid RequestUser request) {
+        User data = service.create(request);
         HashMap response = new HashMap<>();
         response.put("success", true);
         response.put("status_code", 201);
@@ -59,8 +61,8 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity update(@PathVariable String id, @RequestBody @Valid RequestProduct request) {
-        Product data = service.update(id, request);
+    public ResponseEntity update(@PathVariable String id, @RequestBody @Valid RequestUser request) {
+        User data = service.update(id, request);
         HashMap response = new HashMap<>();
         response.put("success", true);
         response.put("status_code", 200);
