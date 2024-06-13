@@ -61,4 +61,17 @@ public class UserService {
     public void deleteById(String id){
         repository.deleteById(id);
     }
+
+    public User save(User user){
+        if(repository.existsByEmail(user.getEmail())){
+            throw new BadRequestException("Email already Exist!");
+        }
+
+        if(repository.existsByUsername(user.getUsername())){
+            throw new BadRequestException("Username already Exist!");
+        }
+
+        return repository.save(user);
+
+    }
 }
