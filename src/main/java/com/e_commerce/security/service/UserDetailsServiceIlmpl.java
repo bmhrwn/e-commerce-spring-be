@@ -17,13 +17,10 @@ public class UserDetailsServiceIlmpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
-
-        if (user == null) {
-            throw new UsernameNotFoundException("Username" + username + " tidak ditemukan");
-        }
-
+        User user = userRepository.findById(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Username " + username + " tidak ditemukan"));
         return UserDetailsImpl.build(user);
+
     }
 
 }

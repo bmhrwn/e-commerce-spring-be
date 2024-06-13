@@ -5,12 +5,14 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.e_commerce.dto.RequestUser;
 import com.e_commerce.entity.User;
 import com.e_commerce.exception.BadRequestException;
 import com.e_commerce.exception.ResourceNotFoundException;
 import com.e_commerce.repository.UserRepository;
+
 
 @Service
 public class UserService {
@@ -31,11 +33,14 @@ public class UserService {
             throw new BadRequestException("Email already Exist!");
         }
 
-        if(repository.existsByUsername(request.getUsername())){
-            throw new BadRequestException("Username already Exist!");
+     
+        if (repository.existsById(request.getUsername())) {
+            throw new BadRequestException("Username " + request.getUsername() + " sudah terdaftar");
         }
+
+
         User user = new User();
-        user.setId(UUID.randomUUID().toString());
+        user.setId(request.getUsername());
         user.setName(request.getName());
         user.setUsername(request.getUsername());
         user.setPassword(request.getPassword());
@@ -63,13 +68,18 @@ public class UserService {
     }
 
     public User save(User user){
-        if(repository.existsByEmail(user.getEmail())){
-            throw new BadRequestException("Email already Exist!");
+        if (!StringUtils.hasText(user.getId())) {
+            throw new BadRequestException("Username harus diisi");
         }
 
-        if(repository.existsByUsername(user.getUsername())){
-            throw new BadRequestException("Username already Exist!");
+        if (repository.existsById(user.getId())) {
+            throw new BadRequestException("Username " + user.getId() + " sudah terdaftar");
         }
+
+        if (repository.existsById(user.getId())) {
+            throw new BadRequestException("Username " + user.getId() + " sudah terdaftar");
+        }
+
 
         return repository.save(user);
 
