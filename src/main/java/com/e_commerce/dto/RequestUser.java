@@ -1,11 +1,13 @@
 package com.e_commerce.dto;
 
+import java.io.Serializable;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class RequestUser {
+public class RequestUser implements Serializable {
 
     @NotBlank
     private String password;

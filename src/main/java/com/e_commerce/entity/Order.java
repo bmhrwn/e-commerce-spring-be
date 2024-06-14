@@ -35,11 +35,11 @@ public class Order implements Serializable{
 
     private String sendAddress;
 
-    private BigDecimal qty;
+    private BigDecimal total;
 
     private BigDecimal shipCost;
 
-    private BigDecimal total;
+    private BigDecimal totalAll;
 
     @Enumerated(EnumType.STRING)
     private StatusPemesanan status;

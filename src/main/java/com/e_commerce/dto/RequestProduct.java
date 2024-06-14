@@ -1,5 +1,6 @@
 package com.e_commerce.dto;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import jakarta.validation.constraints.NotBlank;
@@ -7,7 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class RequestProduct {
+public class RequestProduct implements Serializable {
 
 
     @NotBlank
