@@ -1,15 +1,12 @@
 package com.e_commerce.controller;
 
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +19,6 @@ import com.e_commerce.dto.SignUpRequest;
 import com.e_commerce.entity.User;
 import com.e_commerce.security.jwt.JwtUtils;
 import com.e_commerce.security.service.UserDetailsImpl;
-import com.e_commerce.security.service.UserDetailsServiceIlmpl;
 import com.e_commerce.service.UserService;
 
 import jakarta.validation.Valid;
@@ -59,6 +55,7 @@ public class AuthController {
     public User signup(@RequestBody @Valid SignUpRequest request) {
         User user = new User();
         user.setId(request.getUsername());
+        user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setName(request.getName());

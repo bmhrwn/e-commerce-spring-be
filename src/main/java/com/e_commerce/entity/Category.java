@@ -13,10 +13,11 @@ import lombok.Data;
 @Table(name = "categorys")
 public class Category implements Serializable {
 
+    
     @Id
     private String id;
-
+    
     private String name;
-
+    
 
 }
