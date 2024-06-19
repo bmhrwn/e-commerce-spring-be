@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.e_commerce.entity.Order;
 import com.e_commerce.entity.OrderLog;
 import com.e_commerce.entity.User;
+import com.e_commerce.model.StatusPemesanan;
 import com.e_commerce.repository.OrderLogRepository;
 
 @Service
@@ -38,4 +39,7 @@ public class OrderLogService {
         orderLogRepository.save(orderLog);
 
     }
+
+
+ 
 }
