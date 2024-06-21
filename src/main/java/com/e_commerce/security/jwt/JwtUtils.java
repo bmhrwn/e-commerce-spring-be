@@ -21,10 +21,13 @@ import io.jsonwebtoken.UnsupportedJwtException;
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
+    @Value("${jwt.refreshExpirationMs}")
+    private int RefreshJwtExpirationMs;
     @Value("${jwt.expirationMs}")
     private int jwtExpirationMs;
     @Value("${jwt.secret}")
     private String jwtSecret;
+
 
     public boolean validateJwtToken(String authToken) {
         try {
@@ -51,6 +54,15 @@ public class JwtUtils {
         return Jwts.builder().setSubject((principal.getUsername()))
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .compact();
+    }
+
+    public String generateRefreshJwtToken(Authentication authentication) {
+        UserDetailsImpl principal = (UserDetailsImpl) authentication.getPrincipal();
+        return Jwts.builder().setSubject((principal.getUsername()))
+                .setIssuedAt(new Date())
+                .setExpiration(new Date((new Date()).getTime() + RefreshJwtExpirationMs))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }
