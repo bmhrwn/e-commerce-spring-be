@@ -13,6 +13,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import com.e_commerce.security.jwt.AuthEntryPointJwt;
 import com.e_commerce.security.jwt.AuthTokenFilter;
@@ -50,6 +53,22 @@ public class WebSecurityConfig {
     @Bean
     AuthenticationManager authenticationManager(AuthenticationConfiguration authentication) throws Exception {
         return authentication.getAuthenticationManager();
+    }
+
+    @Bean
+    public CorsFilter corsFilter (){
+        UrlBasedCorsConfigurationSource soure = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.addAllowedOrigin("http://localhost:3000");
+        config.setAllowCredentials(true);
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("GET");
+        config.addAllowedMethod("POST");
+        config.addAllowedMethod("PUT");
+        config.addAllowedMethod("PATCH");
+        config.addAllowedMethod("DELETE");
+        soure.registerCorsConfiguration("/**", config);
+        return new CorsFilter(soure);
     }
 
 }
