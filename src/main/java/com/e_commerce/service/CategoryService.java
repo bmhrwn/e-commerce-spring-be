@@ -32,10 +32,8 @@ public class CategoryService {
         return repository.save(category);
     }
 
-    public Category update(String id,RequestCategory request){
-        Category category = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id category not found"));
-        category.setName(request.getName());
-        return repository.save(category);
+    public Category update(Category request){
+        return repository.save(request);
     }
     
     public void deleteById(String id){

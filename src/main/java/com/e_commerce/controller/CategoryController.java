@@ -61,9 +61,9 @@ public class CategoryController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity update(@PathVariable String id, @RequestBody @Valid RequestCategory request) {
-        Category data = service.update(id,request);
+    @PutMapping("")
+    public ResponseEntity update( @RequestBody @Valid Category request) {
+        Category data = service.update(request);
         HashMap response = new HashMap<>();
         response.put("success", true);
         response.put("status_code", 200);
